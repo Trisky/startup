@@ -1,0 +1,32 @@
+#hidden {
+    display:none;
+    position:relative;
+    width: 30%;
+    height: 30%;
+    margin: auto auto;
+    align-content: center;
+    background-color: black;
+    opacity: 0.8;
+    border: 5% 5%;
+    /*margin: 5% 5%;*/
+}
+
+#hidden p{
+    color: white;
+    width:100%;
+    text-align: center;
+
+}
+
+big{
+    font-size: 24px;
+    color: black;
+}
+section > *{
+    clear:both;
+    text-align: center;
+}
+section {
+text-align: center;
+    
+}
