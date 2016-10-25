@@ -73,3 +73,9 @@ padding: 5% 5%;
  background-color:blue !important;
 }
 
+@media only screen and (max-width: 800px)  {
+    aside{
+        display: none !important ;
+    }
+
+}
