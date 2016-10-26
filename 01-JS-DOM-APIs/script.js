@@ -1,28 +1,70 @@
-$("#hideButton").click(function () {
-    $("#hidden").hide();
-});
 
-$(document).ready(function () {
-    $("#hidden").fadeIn();
-});
+// $(document).ready(getData());
 
 
-$(document).ready(getData());
-
-function getResponse() {
-    var req = new XMLHttpRequest();
-    req.open('GET', 'http://api.icndb.com/jokes/random', false);
-    req.send(null);
-    return req;
+function printResponse(funcion) {
+    var data = funcion();
 };
 
 
-function setSectionResponse(){
-    var req = getResponse();
-    if(req.status ==200){
-           // $("response").content
-    }
-    else{
-        //set rojo TODO
-    }
-}
+
+function getRepo(elRepo) {
+    $("ul").empty();
+    var url = ' https://api.github.com/search/repositories';
+    $.getJSON(url, { q: elRepo })
+
+        .done(function (response) {
+            console.log(response);
+            var items = response.items;
+
+            $.each(items, function (i, item) {
+                $("#repoList").append('<li>' + item.full_name + '</li>');
+
+            });
+        })
+        .fail(function () {
+            console.log("error");
+            $("#repoList").css('background-color', 'red');
+            $("#repoList").append('<li>' + "ERROR" + '</li>');
+        })
+};
+
+
+//con jQuery
+function getJoke() {
+    var url = 'http://api.icndb.com/jokes/random'
+    $.getJSON(url).done(function (response) {
+        console.log(response.value);
+        var joke = response.value.joke
+        $("#response").css('background-color', 'lightgreen');
+        $("#response").html(joke);
+    })
+        .fail(function () {
+            console.log("error"+ response);
+            $("#response").css('background-color', 'red');
+        })
+};
+
+
+function getThisRepo() {
+    var repoName = $("repoName").val();
+    getRepo(repoName);
+};
+
+$(document).ready(function () {
+    $("#hidden").fadeIn();
+    $("#hideButton").click(function () {
+        $("#hidden").fadeOut();
+    });
+
+    
+
+});
+
+
+$("#getJoke").click(getJoke());
+$("#getRepo").click(getRepo("JavaScript"));
+$("#getThisRepo").click(getThisRepo());
+// document.getElementById("getJoke").click(getJoke());
+// document.getElementById("getRepo").click(getRepo("JavaScript"));
+// document.getElementById("getThisRepo").click(getThisRepo());

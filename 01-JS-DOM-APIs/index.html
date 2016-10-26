@@ -7,19 +7,45 @@
 	<script src="node_modules\jquery\dist\jquery.min.js"></script>
 	<script src="script.js"></script>
 
+
 </head>
 
 <body>
-	<section >
-		<big>
-        Title 4 you
-        </big>
-		
-	</section >
-    <section id="hidden">
-			<p>Hello world</p>
+    
+	<section id="hidden">
+		<p>Hello world</p>
+        <section>
 			<button type="button" id="hideButton">Close</button>
-    </section>
+		</section>
+	</section>
+    <master>a </master>
+
+	<master>
+		
+		
+        <section>
+			<big>
+             Big Title
+            </big>
+		</section>
+		<section>
+			<button type="button" id="getJoke">getJoke</button>
+		</section>
+		<section class="joke" id="response"></section>
+		<section>
+			<button type="button" id="getRepo">get default repo</button>
+		</section>
+		<section>
+			<input type="text" id="repoName" value="css">
+			<button type="button" id="getThisRepo">get this repo</button>
+		</section>
+
+	</master>
+
+
+	<ul id="repoList">
+	</ul>
+
 
 
 </body>
