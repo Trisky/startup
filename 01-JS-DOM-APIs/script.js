@@ -1,6 +1,15 @@
-function printResponse(funcion) {
-    var data = funcion();
-};
+$(document).ready(function () {
+    $("#hidden").fadeIn();
+
+    $("#hideButton").click(function () {
+        $("#hidden").fadeOut();
+    });
+
+    $("#getJoke").click(function () { getJoke() });
+    $("#getRepo").click(function () { getRepo("JavaScript") });
+    $("#getThisRepo").click(function () { getThisRepo() });
+    $("#showMatrix").click(function () { addMatrixSection() });
+});
 
 function getRepo(elRepo) {
     $("ul").empty();
@@ -10,7 +19,7 @@ function getRepo(elRepo) {
         .done(function (response) {
             console.log(response);
             var items = response.items;
-
+            $("#repoList").css('background-color', 'lightblue');
             $.each(items, function (i, item) {
                 $("#repoList").append('<li>' + item.full_name + '</li>');
 
@@ -32,25 +41,66 @@ function getJoke() {
         $("#response").html(joke);
     })
         .fail(function () {
-            console.log("error"+ response);
+            console.log("error" + response);
             $("#response").css('background-color', 'red');
         })
 };
 
 function getThisRepo() {
-    var repoName = $("repoName").val();
+    var repoName = $("#repoName").val();
     getRepo(repoName);
+
 };
 
+function createMatrix() {
+    return items = [
+        [1, 2, 99],
+        [3, 4, 98],
+        [5, 6, 97]
+    ];
+}
 
-$(document).ready(function () {
-    $("#hidden").fadeIn();    
+function matrixToDOM() {
 
-    $("#hideButton").click(function () {
-        $("#hidden").fadeOut();
+    var matrix = createMatrix();
+    var domMatrix = populateDOMMatrix(matrix);
+    var matrixSection = document.getElementById("matrixSection");
+
+    matrixSection.appendChild(domMatrix);
+}
+
+//FUNCTION 12
+function populateDOMMatrix(matrix) {
+
+    var matrixDOM = document.createElement("ul");
+
+    matrix.forEach(function (row) {
+        var li = document.createElement("li");
+        var textnode = document.createTextNode(" | ");
+        li.appendChild(textnode);
+        row.forEach(function (element) {
+            var textnode = document.createTextNode(element + " | ");
+            li.appendChild(textnode);
+        });
+        matrixDOM.appendChild(li);
     });
+    return matrixDOM;
+}
 
-    $("#getJoke").click(getJoke());
-    $("#getRepo").click(getRepo("JavaScript"));
-    $("#getThisRepo").click(getThisRepo());
-});
+function addMatrixSection() {
+    var newSection = document.getElementById("matrixSection");
+    if (newSection != null) {
+        matrixSection.parentElement.removeChild(matrixSection);
+    }
+
+    var newSection = document.createElement("section");
+    newSection.id = "matrixSection";
+    var newContent = document.createTextNode("This is a nice table to show:");
+    newSection.appendChild(newContent);
+    var master = document.getElementById("middleColumn");
+    var lastSection = document.getElementById("repoSection");
+    master.insertBefore(newSection, lastSection);
+    matrixToDOM();
+}
+
+
