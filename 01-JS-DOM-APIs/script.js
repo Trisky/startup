@@ -1,12 +1,6 @@
-
-// $(document).ready(getData());
-
-
 function printResponse(funcion) {
     var data = funcion();
 };
-
-
 
 function getRepo(elRepo) {
     $("ul").empty();
@@ -29,8 +23,6 @@ function getRepo(elRepo) {
         })
 };
 
-
-//con jQuery
 function getJoke() {
     var url = 'http://api.icndb.com/jokes/random'
     $.getJSON(url).done(function (response) {
@@ -45,26 +37,20 @@ function getJoke() {
         })
 };
 
-
 function getThisRepo() {
     var repoName = $("repoName").val();
     getRepo(repoName);
 };
 
+
 $(document).ready(function () {
-    $("#hidden").fadeIn();
+    $("#hidden").fadeIn();    
+
     $("#hideButton").click(function () {
         $("#hidden").fadeOut();
     });
 
-    
-
+    $("#getJoke").click(getJoke());
+    $("#getRepo").click(getRepo("JavaScript"));
+    $("#getThisRepo").click(getThisRepo());
 });
-
-
-$("#getJoke").click(getJoke());
-$("#getRepo").click(getRepo("JavaScript"));
-$("#getThisRepo").click(getThisRepo());
-// document.getElementById("getJoke").click(getJoke());
-// document.getElementById("getRepo").click(getRepo("JavaScript"));
-// document.getElementById("getThisRepo").click(getThisRepo());
