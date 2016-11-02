@@ -1,0 +1,31 @@
+<html>
+
+<head>
+	<script src="node_modules\angular\angular.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="data.js"></script>
+	<script src="app.js"></script>
+</head>
+
+<body ng-app="mvcApp">
+	<div ng-controller="MoviesCtrl">
+		{{welcomeText}}
+		<div class="container">
+
+			<li class="animate-repeat" ng-repeat="movie in movieList">
+				{{movie.title}}, {{movie.year}}, {{movie.duration}}m
+                <button id="Delete.{{$index}}">Delete</button>
+			</li>
+		</div>
+		<div class="addMovie">
+			<input id="title" ng-model="title"></input>
+			<input id="duration" ng-model="duration"></input>
+			<input id="year" ng-model="year"></input>
+			<button id=btnSubmit ng-click="addMovie()">add this Movie</button>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
